@@ -6,6 +6,8 @@ require("../inc/sendgrid/sendgrid-php.php");
 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
+
+
 function send_mail($uemail, $token, $type)
 {
 
@@ -73,6 +75,7 @@ if (isset($_POST['register'])) {
     exit;
   }
   $enc_pass = password_hash($data['pass'], PASSWORD_BCRYPT);
+
 
   $query = "INSERT INTO `user_cred`(`name`, `email`, `address`, `phonenum`, `pincode`, `dob`,`profile`, `password`, `is_verified`) VALUES (?,?,?,?,?,?,?,?,?)";
   $values = [$data['name'], $data['email'], $data['address'], $data['phonenum'], $data['pincode'], $data['dob'], $img, $enc_pass, '1'];

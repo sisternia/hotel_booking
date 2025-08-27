@@ -1,11 +1,12 @@
 <div class="container-fluid bg-dark text-light p-3 d-flex align-items-center justify-content-between sticky-top">
-  <h3 class="mb-0 h-font text-center">Admin </h3>
+  <h3 class="mb-0 h-font">Sea Hotel</h3>
   <a href="logout.php" class="btn btn-light btn-sm">Đăng Xuất</a>
 </div>
 
 <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard-menu">
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid flex-lg-column align-items-stretch">
+      <h4 class="mt-2 text-light">ADMIN</h4>
       <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,17 +23,15 @@
             <div class="collapse show px-3 small mb-1" id="bookingLinks">
               <ul class="nav nav-pills flex-column rounded border border-secondary">
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="user_bookings.php">Phòng Mới Đặt</a>
+                  <a class="nav-link text-white" href="khdatphong.php">Phòng Mới Đặt</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-white" href="new_bookings.php">Xác Nhận Thanh Toán</a>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link text-white" href="booking_records.php">Hồ Sơ Đặt Phòng</a>
                 </li>
-                <!-- <li class="nav-item">
-                  <a class="nav-link text-white" href="refund_bookings.php">Hoàn Chi Phí</a>
-                </li> -->
               </ul>
             </div>
           </li>
@@ -49,10 +48,10 @@
             <a class="nav-link text-white" href="rooms.php">Phòng</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="features_facilities.php">Cơ Sở và Tiện Nghi</a>
+            <a class="nav-link text-white" href="features_facilities.php">Cơ Sở và Trang Thiết Bị</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="carousel.php">Carousel</a>
+            <a class="nav-link text-white" href="carousel.php">Slided</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="settings.php">Thiết Lập</a>

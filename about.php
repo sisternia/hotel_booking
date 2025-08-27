@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+  <link  rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Giới Thiệu</title>
+  <title><?php echo $settings_r['site_title'] ?> - GIỚI THIỆU</title>
   <style>
-    .box {
+    .box{
       border-top-color: var(--teal) !important;
     }
   </style>
 </head>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -23,22 +21,25 @@
     <h2 class="fw-bold h-font text-center">GIỚI THIỆU</h2>
     <div class="h-line bg-dark"></div>
     <p class="text-center mt-3">
-      Khách sạn <?php echo $settings_r['site_title'] ?> cam kết mang đến cho khách hàng những trải nghiệm<br>
-      tuyệt vời nhất trong một không gian sang trọng và đẳng cấp.
+    Khách sạn Sea Hotel cam kết mang đến cho khách hàng những trải nghiệm<br>
+    tuyệt vời nhất trong một không gian sang trọng và đẳng cấp.
     </p>
   </div>
 
   <div class="container">
     <div class="row justify-content-between align-items-center">
       <div class="col-lg-6 col-md-5 mb-4 order-lg-1 order-md-1 order-2">
-        <h3 class="mb-3">Khách Sạn <?php echo $settings_r['site_title'] ?> </h3>
+        <h3 class="mb-3">Khách Sạn Sea Hotel</h3>
         <p>
-          <?php echo $settings_r['site_title'] ?> mang đến trải nghiệm đặt phòng khách sạn trực tuyến thuận lợi và linh hoạt.
-          Với sự đa dạng về lựa chọn, chất lượng đảm bảo và dịch vụ khách hàng xuất sắc, chúng tôi là đối tác tin cậy cho hành trình của bạn.
+        Khách sạn Sea Hotel là một trong những khách sạn hàng đầu tại Việt Nam,
+         được thiết kế theo phong cách hiện đại và đầy đủ tiện nghi, với hệ thống 
+         phòng nghỉ sang trọng, nhà hàng, quầy bar, trung tâm thể dục và spa. Khách sạn
+          có hơn 50 tầng với hơn 500 phòng nghỉ rộng rãi, được trang bị đầy đủ tiện nghi 
+          hiện đại, đảm bảo sự thoải mái và tiện nghi cho khách hàng
         </p>
       </div>
       <div class="col-lg-5 col-md-5 mb-4 order-lg-2 order-md-2 order-1">
-        <img src="images/about/hotel-1749602_1280.jpg" class="w-100">
+        <img src="images/about/mt.jpg" class="w-100">
       </div>
     </div>
   </div>
@@ -77,18 +78,18 @@
   <div class="container px-4">
     <div class="swiper mySwiper">
       <div class="swiper-wrapper mb-5">
-        <?php
-        $about_r = selectAll('team_details');
-        $path = ABOUT_IMG_PATH;
-        while ($row = mysqli_fetch_assoc($about_r)) {
-          echo <<<data
+        <?php 
+          $about_r = selectAll('team_details');
+          $path=ABOUT_IMG_PATH;
+          while($row = mysqli_fetch_assoc($about_r)){
+            echo<<<data
               <div class="swiper-slide bg-white text-center overflow-hidden rounded">
                 <img src="$path$row[picture]" class="w-100">
                 <h5 class="mt-2">$row[name]</h5>
               </div>
             data;
-        }
-
+          }
+        
         ?>
       </div>
       <div class="swiper-pagination"></div>
@@ -125,5 +126,4 @@
 
 
 </body>
-
 </html>

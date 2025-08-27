@@ -1,11 +1,10 @@
 <?php
-require('inc/essentials.php');
-require('inc/db_config.php');
-adminLogin();
+  require('inc/essentials.php');
+  require('inc/db_config.php');
+  adminLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,6 @@ adminLogin();
   <title>Admin - Phòng</title>
   <?php require('inc/links.php'); ?>
 </head>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -35,7 +33,7 @@ adminLogin();
             <div class="table-responsive-lg" style="height: 450px; overflow-y: scroll;">
               <table class="table table-hover border text-center">
                 <thead>
-                  <tr class="bg-dark text-light text-center">
+                  <tr class="bg-dark text-light">
                     <th scope="col">#</th>
                     <th scope="col">Tên Phòng</th>
                     <th scope="col">Diện Tích</th>
@@ -46,7 +44,7 @@ adminLogin();
                     <th scope="col">Hành Động</th>
                   </tr>
                 </thead>
-                <tbody id="room-data">
+                <tbody id="room-data">                 
                 </tbody>
               </table>
             </div>
@@ -57,12 +55,12 @@ adminLogin();
       </div>
     </div>
   </div>
-
+  
 
   <!-- Add room modal -->
 
   <div class="modal fade" id="add-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+    <div class="modal-dialog modal-lg">
       <form id="add_room_form" autocomplete="off">
         <div class="modal-content">
           <div class="modal-header">
@@ -97,36 +95,36 @@ adminLogin();
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Đặc Tính</label>
                 <div class="row">
-                  <?php
-                  $res = selectAll('features');
-                  while ($opt = mysqli_fetch_assoc($res)) {
-                    echo "
-                        <div class='col-md-4'>
+                  <?php 
+                    $res = selectAll('features');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-md-3 mb-1'>
                           <label>
                             <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
                             $opt[name]
                           </label>
                         </div>
                       ";
-                  }
+                    }
                   ?>
                 </div>
               </div>
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Tiện Nghi & Trang Thiết Bị</label>
                 <div class="row">
-                  <?php
-                  $res = selectAll('facilities');
-                  while ($opt = mysqli_fetch_assoc($res)) {
-                    echo "
-                        <div class='col-md-4'>
+                  <?php 
+                    $res = selectAll('facilities');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-md-3 mb-1'>
                           <label>
                             <input type='checkbox' name='facilities' value='$opt[id]' class='form-check-input shadow-none'>
                             $opt[name]
                           </label>
                         </div>
                       ";
-                  }
+                    }
                   ?>
                 </div>
               </div>
@@ -148,7 +146,7 @@ adminLogin();
   <!-- Edit room modal -->
 
   <div class="modal fade" id="edit-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+    <div class="modal-dialog modal-lg">
       <form id="edit_room_form" autocomplete="off">
         <div class="modal-content">
           <div class="modal-header">
@@ -183,36 +181,36 @@ adminLogin();
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Đặc Tính</label>
                 <div class="row">
-                  <?php
-                  $res = selectAll('features');
-                  while ($opt = mysqli_fetch_assoc($res)) {
-                    echo "
-                        <div class='col-md-4'>
+                  <?php 
+                    $res = selectAll('features');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-md-3 mb-1'>
                           <label>
                             <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
                             $opt[name]
                           </label>
                         </div>
                       ";
-                  }
+                    }
                   ?>
                 </div>
               </div>
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Tiện Nghi & Trang Thiết Bị</label>
                 <div class="row">
-                  <?php
-                  $res = selectAll('facilities');
-                  while ($opt = mysqli_fetch_assoc($res)) {
-                    echo "
-                        <div class='col-md-4'>
+                  <?php 
+                    $res = selectAll('facilities');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-md-3 mb-1'>
                           <label>
                             <input type='checkbox' name='facilities' value='$opt[id]' class='form-check-input shadow-none'>
                             $opt[name]
                           </label>
                         </div>
                       ";
-                  }
+                    }
                   ?>
                 </div>
               </div>
@@ -235,7 +233,7 @@ adminLogin();
   <!-- Manage room images modal -->
 
   <div class="modal fade" id="room-images" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Tên Phòng</h5>
@@ -260,7 +258,7 @@ adminLogin();
                   <th scope="col">Xoá</th>
                 </tr>
               </thead>
-              <tbody id="room-image-data">
+              <tbody id="room-image-data">                 
               </tbody>
             </table>
           </div>
@@ -275,5 +273,4 @@ adminLogin();
   <script src="scripts/rooms.js"></script>
 
 </body>
-
 </html>

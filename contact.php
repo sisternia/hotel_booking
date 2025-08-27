@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Liên Hệ</title>
+  <title><?php echo $settings_r['site_title'] ?> - LIÊN HỆ</title>
 </head>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -18,6 +16,7 @@
     <div class="h-line bg-dark"></div>
     <p class="text-center mt-3">
       Liên hệ và góp ý với chúng tôi <br>
+       .
     </p>
   </div>
 
@@ -38,14 +37,14 @@
             <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
           </a>
           <br>
-          <?php
-          if ($contact_r['pn2'] != '') {
-            echo <<<data
+          <?php 
+            if($contact_r['pn2']!=''){
+              echo<<<data
                 <a href="tel: +$contact_r[pn2]" class="d-inline-block text-decoration-none text-dark">
                   <i class="bi bi-telephone-fill"></i> +$contact_r[pn2]
                 </a>
               data;
-          }
+            }
           ?>
 
 
@@ -55,14 +54,14 @@
           </a>
 
           <h5 class="mt-4">Theo Dõi Ngay</h5>
-          <?php
-          if ($contact_r['tw'] != '') {
-            echo <<<data
+          <?php 
+            if($contact_r['tw']!=''){
+              echo<<<data
                 <a href="$contact_r[tw]" class="d-inline-block text-dark fs-5 me-2">
                   <i class="bi bi-twitter me-1"></i>
                 </a>
               data;
-          }
+            }
           ?>
 
           <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark fs-5 me-2">
@@ -101,25 +100,26 @@
   </div>
 
 
-  <?php
+  <?php 
 
-  if (isset($_POST['send'])) {
-    $frm_data = filteration($_POST);
+    if(isset($_POST['send']))
+    {
+      $frm_data = filteration($_POST);
 
-    $q = "INSERT INTO `user_queries`(`name`, `email`, `subject`, `message`) VALUES (?,?,?,?)";
-    $values = [$frm_data['name'], $frm_data['email'], $frm_data['subject'], $frm_data['message']];
+      $q = "INSERT INTO `user_queries`(`name`, `email`, `subject`, `message`) VALUES (?,?,?,?)";
+      $values = [$frm_data['name'],$frm_data['email'],$frm_data['subject'],$frm_data['message']];
 
-    $res = insert($q, $values, 'ssss');
-    if ($res == 1) {
-      alert('success', 'Mail sent!');
-    } else {
-      alert('error', 'Server Down! Try again later.');
+      $res = insert($q,$values,'ssss');
+      if($res==1){
+        alert('success','Mail sent!');
+      }
+      else{
+        alert('error','Server Down! Try again later.');
+      }
     }
-  }
   ?>
 
   <?php require('inc/footer.php'); ?>
 
 </body>
-
 </html>

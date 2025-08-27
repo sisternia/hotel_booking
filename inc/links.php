@@ -5,26 +5,26 @@
 
 <?php
 
-session_start();
-date_default_timezone_set('Asia/Ho_Chi_Minh');
+  session_start();
+  date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 
-require('admin/inc/db_config.php');
-require('admin/inc/essentials.php');
+  require('admin/inc/db_config.php');
+  require('admin/inc/essentials.php');
+  
+  $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+  $settings_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
+  $values = [1];
+  $contact_r = mysqli_fetch_assoc(select($contact_q,$values,'i'));
+  $settings_r = mysqli_fetch_assoc(select($settings_q,$values,'i'));
 
-$contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
-$settings_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
-$values = [1];
-$contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i'));
-$settings_r = mysqli_fetch_assoc(select($settings_q, $values, 'i'));
-
-if ($settings_r['shutdown']) {
-  echo <<<alertbar
-      <div class='bg-danger text-center p-2 fw-bold text-light'>
+  if($settings_r['shutdown']){
+    echo<<<alertbar
+      <div class='bg-warning text-center p-2 fw-bold text-light'>
         <i class="bi bi-exclamation-triangle-fill"></i>
-        Khách sạn đang bảo trì, vui lòng quay lại sau!
+        Khách sạn đag bảo trì, vui lòng quay lại sau!
       </div>
     alertbar;
-}
-
+  }
+  
 ?>

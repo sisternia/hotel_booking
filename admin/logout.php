@@ -1,7 +1,9 @@
-<?php
+<?php 
 
-require('inc/essentials.php');
+  require('inc/essentials.php');
 
-session_start();
-session_destroy();
-redirect('index.php');
+  session_start();
+  session_destroy();
+  redirect('index.php');
+
+?>

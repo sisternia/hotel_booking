@@ -1,8 +1,3 @@
-<?php
-require_once("inc/links.php");
-$current_page = basename($_SERVER['PHP_SELF']);
-?>
-
 <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
@@ -11,27 +6,28 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">
+        <li class="nav-item">
           <a class="nav-link me-2" href="index.php">Trang Chủ</a>
         </li>
-        <li class="nav-item <?php echo ($current_page == 'rooms.php') ? 'active' : ''; ?>">
+        <li class="nav-item">
           <a class="nav-link me-2" href="rooms.php">Phòng</a>
         </li>
-        <li class="nav-item <?php echo ($current_page == 'facilities.php') ? 'active' : ''; ?>">
+        <li class="nav-item">
           <a class="nav-link me-2" href="facilities.php">Tiện Nghi</a>
         </li>
-        <li class="nav-item <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">
+        <li class="nav-item">
           <a class="nav-link me-2" href="contact.php">Liên Hệ</a>
         </li>
-        <li class="nav-item <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">
+        <li class="nav-item">
           <a class="nav-link" href="about.php">Giới Thiệu</a>
         </li>
       </ul>
       <div class="d-flex">
-        <?php
-        if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
-          $path = USERS_IMG_PATH;
-          echo <<<data
+        <?php 
+          if(isset($_SESSION['login']) && $_SESSION['login']==true)
+          {
+            $path = USERS_IMG_PATH;
+            echo<<<data
               <div class="btn-group">
                 <button type="button" class="btn btn-outline-dark shadow-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                   <img src="$path$_SESSION[uPic]" style="width: 25px; height: 25px;" class="me-1 rounded-circle">
@@ -39,13 +35,15 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </button>
                 <ul class="dropdown-menu dropdown-menu-lg-end">
                   <li><a class="dropdown-item" href="profile.php">Thông Tin</a></li>
-                  <li><a class="dropdown-item" href="bookings.php">Hóa đơn</a></li>
+                  <li><a class="dropdown-item" href="bookings.php">Phòng Đặt</a></li>
                   <li><a class="dropdown-item" href="logout.php">Đăng Xuất</a></li>
                 </ul>
               </div>
             data;
-        } else {
-          echo <<<data
+          }
+          else
+          {
+            echo<<<data
               <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Đăng Nhập
               </button>
@@ -53,7 +51,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 Đăng Ký
               </button>
             data;
-        }
+          }
         ?>
       </div>
     </div>
@@ -61,7 +59,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </nav>
 
 <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+  <div class="modal-dialog">
     <div class="modal-content">
       <form id="login-form">
         <div class="modal-header">
@@ -77,16 +75,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
           </div>
           <div class="mb-4">
             <label class="form-label">Mật Khẩu</label>
-            <div class="input-group mb-3">
-              <input type="password" name="pass" id="password" class="form-control shadow-none" required />
-              <button class="btn btn-outline-secondary" type="button" aria-hidden="true" id="eye" onclick="toggle()"><i class="bi bi-eye"></i></button>
-            </div>
+            <input type="password" name="pass" required class="form-control shadow-none">
           </div>
           <div class="d-flex align-items-center justify-content-between mb-2">
             <button type="submit" class="btn btn-dark shadow-none">Đăng Nhập</button>
-            <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal">
-              Quên mật khẩu?
-            </button>
+            <!-- <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal">
+              Forgot Password?
+            </button> -->
           </div>
         </div>
       </form>
@@ -95,7 +90,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </div>
 
 <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" style="display: flex; justify-content: center;">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <form id="register-form">
         <div class="modal-header">
@@ -137,17 +132,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Mật Khẩu</label>
-                <div class="input-group mb-3">
-                  <input type="password" name="pass" id="password1" class="form-control shadow-none" required />
-                  <button class="btn btn-outline-secondary" type="button" aria-hidden="true" id="eye1" onclick="toggle1()"><i class="bi bi-eye"></i></button>
-                </div>
+                <input name="pass" type="password" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Nhập Lại Mật Khẩu</label>
-                <div class="input-group mb-3">
-                  <input type="password" name="cpass" id="password2" class="form-control shadow-none" required />
-                  <button class="btn btn-outline-secondary" type="button" aria-hidden="true" id="eye2" onclick="toggle2()"><i class="bi bi-eye"></i></button>
-                </div>
+                <label class="form-label">NHập Lại Mật Khẩu</label>
+                <input name="cpass" type="password" class="form-control shadow-none" required>
               </div>
             </div>
           </div>
@@ -161,17 +150,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </div>
 
 <div class="modal fade" id="forgotModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+  <div class="modal-dialog">
     <div class="modal-content">
       <form id="forgot-form">
         <div class="modal-header">
           <h5 class="modal-title d-flex align-items-center">
-            <i class="bi bi-person-circle fs-3 me-2"></i> Quên mật khẩu
+            <!-- <i class="bi bi-person-circle fs-3 me-2"></i> Quên mật khẩu -->
           </h5>
         </div>
         <div class="modal-body">
           <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
-            Lưu ý: Một liên kết sẽ được gửi đến email của bạn để đặt lại mật khẩu của bạn!
+              Lưu ý: Một liên kết sẽ được gửi đến email của bạn để đặt lại mật khẩu của bạn!
           </span>
           <div class="mb-4">
             <label class="form-label">Email</label>
@@ -188,47 +177,3 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </div>
   </div>
 </div>
-
-<script>
-  var state = false;
-
-  function toggle() {
-    if (state) {
-      document.getElementById("password").setAttribute("type", "password");
-      document.getElementById("eye").style.color = '#7a797e';
-      state = false;
-    } else {
-      document.getElementById("password").setAttribute("type", "text");
-      document.getElementById("eye").style.color = '#5887ef';
-      state = true;
-    }
-  }
-
-  var state1 = false;
-
-  function toggle1() {
-    if (state1) {
-      document.getElementById("password1").setAttribute("type", "password");
-      document.getElementById("eye1").style.color = '#7a797e';
-      state1 = false;
-    } else {
-      document.getElementById("password1").setAttribute("type", "text");
-      document.getElementById("eye1").style.color = '#5887ef';
-      state1 = true;
-    }
-  }
-
-  var state2 = false;
-
-  function toggle2() {
-    if (state2) {
-      document.getElementById("password2").setAttribute("type", "password");
-      document.getElementById("eye2").style.color = '#7a797e';
-      state2 = false;
-    } else {
-      document.getElementById("password2").setAttribute("type", "text");
-      document.getElementById("eye2").style.color = '#5887ef';
-      state2 = true;
-    }
-  }
-</script>

@@ -1,54 +1,61 @@
 <?php
-require('inc/essentials.php');
-require('inc/db_config.php');
-adminLogin();
+  require('inc/essentials.php');
+  require('inc/db_config.php');
+  adminLogin();
 
-if (isset($_GET['seen'])) {
-  $frm_data = filteration($_GET);
+  if(isset($_GET['seen']))
+  {
+    $frm_data = filteration($_GET);
 
-  if ($frm_data['seen'] == 'all') {
-    $q = "UPDATE `user_queries` SET `seen`=?";
-    $values = [1];
-    if (update($q, $values, 'i')) {
-      alert('success', 'Đánh dấu tất cả là đã đọc!');
-    } else {
-      alert('error', 'Lỗi hệ thống!');
+    if($frm_data['seen']=='all'){
+      $q = "UPDATE `user_queries` SET `seen`=?";
+      $values = [1];
+      if(update($q,$values,'i')){
+        alert('success','Đánh dấu tất cả là đã đọc!');
+      }
+      else{
+        alert('error','Lỗi hệ thống!');
+      }
     }
-  } else {
-    $q = "UPDATE `user_queries` SET `seen`=? WHERE `sr_no`=?";
-    $values = [1, $frm_data['seen']];
-    if (update($q, $values, 'ii')) {
-      alert('success', 'Đánh dấu là đã đọc!');
-    } else {
-      alert('error', 'Lỗi hệ thống!');
-    }
-  }
-}
-
-if (isset($_GET['del'])) {
-  $frm_data = filteration($_GET);
-
-  if ($frm_data['del'] == 'all') {
-    $q = "DELETE FROM `user_queries`";
-    if (mysqli_query($con, $q)) {
-      alert('success', 'Tất cả tin nhắn đã bị xóa!');
-    } else {
-      alert('error', 'Operation failed!');
-    }
-  } else {
-    $q = "DELETE FROM `user_queries` WHERE `sr_no`=?";
-    $values = [$frm_data['del']];
-    if (delete($q, $values, 'i')) {
-      alert('success', 'Đã xóa dữ liệu!');
-    } else {
-      alert('error', 'Đã xóa dữ liệu!');
+    else{
+      $q = "UPDATE `user_queries` SET `seen`=? WHERE `sr_no`=?";
+      $values = [1,$frm_data['seen']];
+      if(update($q,$values,'ii')){
+        alert('success','Đánh dấu là đã đọc!');
+      }
+      else{
+        alert('error','Lỗi hệ thống!');
+      }
     }
   }
-}
+
+  if(isset($_GET['del']))
+  {
+    $frm_data = filteration($_GET);
+
+    if($frm_data['del']=='all'){
+      $q = "DELETE FROM `user_queries`";
+      if(mysqli_query($con,$q)){
+        alert('success','Tất cả dữ liệu đã bị xóa!');
+      }
+      else{
+        alert('error','Operation failed!');
+      }
+    }
+    else{
+      $q = "DELETE FROM `user_queries` WHERE `sr_no`=?";
+      $values = [$frm_data['del']];
+      if(delete($q,$values,'i')){
+        alert('success','Đã xóa dữ liệu!');
+      }
+      else{
+        alert('error','Đã xóa dữ liệu!');
+      }
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +63,6 @@ if (isset($_GET['del'])) {
   <title>Admin Panel - Phản Hồi</title>
   <?php require('inc/links.php'); ?>
 </head>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -81,43 +87,44 @@ if (isset($_GET['del'])) {
             <div class="table-responsive-md" style="height: 450px; overflow-y: scroll;">
               <table class="table table-hover border">
                 <thead class="sticky-top">
-                  <tr class="bg-dark text-light text-center">
+                  <tr class="bg-dark text-light">
                     <th scope="col">#</th>
-                    <th scope="col" width="10%">Tên</th>
-                    <th scope="col" width="15%">Email</th>
-                    <th scope="col" width="15%">Tiêu Đề</th>
-                    <th scope="col" width="26%">Tin Nhắn</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Email</th>
+                    <th scope="col" width="20%">Tiêu Đề</th>
+                    <th scope="col" width="30%">Tin Nhắn</th>
                     <th scope="col">Ngày</th>
-                    <th scope="col" width="19%">Trạng Thái</th>
+                    <th scope="col">Trạng Thái</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php
-                  $q = "SELECT * FROM `user_queries` ORDER BY `sr_no` DESC";
-                  $data = mysqli_query($con, $q);
-                  $i = 1;
+                  <?php 
+                    $q = "SELECT * FROM `user_queries` ORDER BY `sr_no` DESC";
+                    $data = mysqli_query($con,$q);
+                    $i=1;
 
-                  while ($row = mysqli_fetch_assoc($data)) {
-                    $date = date('d-m-Y', strtotime($row['datentime']));
-                    $seen = '';
-                    if ($row['seen'] != 1) {
-                      $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary'>Đánh dấu là đã đọc</a>";
-                    }
-                    $seen .= "<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'>Xoá</a>";
+                    while($row = mysqli_fetch_assoc($data))
+                    {
+                      $date = date('d-m-Y',strtotime($row['datentime']));
+                      $seen='';
+                      if($row['seen']!=1){
+                        $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary'>Đánh dấu là đã đọc</a> <br>";
+                      }
+                      $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger mt-2'>Xoá</a>";
 
-                    echo <<<query
-                        <tr class='align-middle'>
-                          <td class="text-center">$i</td>
-                          <td class="text-center">$row[name]</td>
+                      echo<<<query
+                        <tr>
+                          <td>$i</td>
+                          <td>$row[name]</td>
                           <td>$row[email]</td>
                           <td>$row[subject]</td>
                           <td>$row[message]</td>
-                          <td class="text-center">$date</td>
-                          <td class="text-center">$seen</td>
+                          <td>$date</td>
+                          <td>$seen</td>
                         </tr>
                       query;
-                    $i++;
-                  }
+                      $i++;
+                    }
                   ?>
                 </tbody>
               </table>
@@ -130,10 +137,9 @@ if (isset($_GET['del'])) {
       </div>
     </div>
   </div>
-
+  
 
   <?php require('inc/scripts.php'); ?>
 
 </body>
-
 </html>

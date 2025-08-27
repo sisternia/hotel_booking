@@ -1,18 +1,16 @@
 <?php
-require('inc/essentials.php');
-adminLogin();
+  require('inc/essentials.php');
+  adminLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Thiết lập</title>
+  <title>Admin</title>
   <?php require('inc/links.php'); ?>
 </head>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -42,9 +40,9 @@ adminLogin();
         <!-- General settings modal -->
 
         <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+          <div class="modal-dialog">
             <form id="general_s_form">
-              <div class=" modal-content">
+              <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Thiết Lập Chung</h5>
                 </div>
@@ -59,8 +57,8 @@ adminLogin();
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Thoát</button>
-                  <button type="submit" class="btn custom-bg text-white shadow-none">Lưu</button>
+                  <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                  <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                 </div>
               </div>
             </form>
@@ -115,7 +113,7 @@ adminLogin();
                   </p>
                 </div>
                 <div class="mb-4">
-                  <h6 class="card-subtitle mb-1 fw-bold">Email</h6>
+                  <h6 class="card-subtitle mb-1 fw-bold">E-mail</h6>
                   <p class="card-text" id="email"></p>
                 </div>
               </div>
@@ -147,7 +145,7 @@ adminLogin();
         <!-- Contacts details modal -->
 
         <div class="modal fade" id="contacts-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+          <div class="modal-dialog modal-lg">
             <form id="contacts_s_form">
               <div class="modal-content">
                 <div class="modal-header">
@@ -206,8 +204,8 @@ adminLogin();
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" onclick="contacts_inp(contacts_data)" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Thoát</button>
-                  <button type="submit" class="btn custom-bg text-white shadow-none">Lưu</button>
+                  <button type="button" onclick="contacts_inp(contacts_data)" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                  <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                 </div>
               </div>
             </form>
@@ -234,7 +232,7 @@ adminLogin();
         <!-- Management Team modal -->
 
         <div class="modal fade" id="team-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+          <div class="modal-dialog">
             <form id="team_s_form">
               <div class="modal-content">
                 <div class="modal-header">
@@ -251,20 +249,22 @@ adminLogin();
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" onclick="member_name.value='', member_picture.value=''" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Thoát</button>
-                  <button type="submit" class="btn custom-bg text-white shadow-none">Lưu</button>
+                  <button type="button" onclick="member_name.value='', member_picture.value=''" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                  <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>
+  
 
   <?php require('inc/scripts.php'); ?>
   <script src="scripts/settings.js"></script>
 
 </body>
-
 </html>

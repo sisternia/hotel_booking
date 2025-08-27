@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Hóa Đơn</title>
+  <title><?php echo $settings_r['site_title'] ?> - PHÒNG ĐẶT</title>
 </head>
 
 <body class="bg-light">
@@ -24,11 +24,11 @@
     <div class="row">
 
       <div class="col-12 my-5 px-4">
-        <h2 class="fw-bold">HÓA ĐƠN</h2>
+        <h2 class="fw-bold">ĐẶT PHÒNG</h2>
         <div style="font-size: 14px;">
           <a href="index.php" class="text-secondary text-decoration-none">TRANG CHỦ</a>
           <span class="text-secondary"> > </span>
-          <a href="#" class="text-secondary text-decoration-none">HÓA ĐƠN</a>
+          <a href="#" class="text-secondary text-decoration-none">PHÒNG ĐẶT</a>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
         if ($data['booking_status'] == 'Đã Thanh Toán') {
           $status_bg = "bg-success";
           if ($data['arrival'] == 1) {
-            $btn = "<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Tải Xuống PDF</a>";
+            // $btn = "<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Tải Xuống PDF</a>";
 
             if ($data['rate_review'] == 0) {
               $btn .= "<button type='button' onclick='review_room($data[booking_id],$data[room_id])' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-dark btn-sm shadow-none ms-2'>Đánh Giá</button>";
@@ -85,15 +85,15 @@
 
         echo <<<bookings
             <div class='col-md-4 px-4 mb-4'>
-              <div class='bg-white p-3 rounded shadow-sm text-center'>
+              <div class='bg-white p-3 rounded shadow-sm'>
                 <h5 class='fw-bold'>$data[room_name]</h5>
-                <p>$data[price] VNĐ</p>
+                <p>$data[price] vnđ</p>
                 <p>
-                  <b>Ngày Nhận Phòng: </b> $checkin <br>
-                  <b>Ngày Trả Phòng: </b> $checkout
+                  <b>Ngày Vào: </b> $checkin <br>
+                  <b>Ngày Trả: </b> $checkout
                 </p>
                 <p>
-                  <b>Tổng: </b> $data[total_pay] VNĐ <br>
+                  <b>Tổng: </b> $data[total_pay] vnđ <br>
                   <b>ID Dơn: </b> $data[order_id] <br>
                   <b>Ngày Đặt: </b> $date
                 </p>
@@ -107,11 +107,14 @@
       }
 
       ?>
+
+
     </div>
   </div>
 
+
   <div class="modal fade" id="reviewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+    <div class="modal-dialog">
       <div class="modal-content">
         <form id="review-form">
           <div class="modal-header">

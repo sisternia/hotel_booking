@@ -6,14 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Xác Nhận Đặt Phòng</title>
+  <title><?php echo $settings_r['site_title'] ?> - CONFIRM BOOKING</title>
   <style>
     .button-disabled {
-      background-color: #77d7c9;
+      background-color: #77d7c9; 
       color: #999;
-      cursor: not-allowed;
+      cursor: not-allowed; 
       pointer-events: none;
     }
+
   </style>
 </head>
 
@@ -23,6 +24,11 @@
 
   <?php
 
+  /*
+      Check room id from url is present or not
+      Shutdown mode is active or not
+      User is logged in or not
+    */
 
   if (!isset($_GET['id']) || $settings_r['shutdown'] == true) {
     redirect('rooms.php');
@@ -87,7 +93,7 @@
             <div class="card p-3 shadow-sm rounded">
               <img src="$room_thumb" class="img-fluid rounded mb-3">
               <h5>$room_data[name]</h5>
-              <h6>$room_data[price] VNĐ</h6>
+              <h6>$room_data[price] vnđ</h6>
             </div>
           data;
 
@@ -98,7 +104,7 @@
         <div class="card mb-4 border-0 shadow-sm rounded-3">
           <div class="card-body">
             <form action="pay_now.php" method="POST" id="booking_form">
-              <h6 class="mb-3 text-center">THÔNG TIN CHI TIẾT PHÒNG ĐẶT</h6>
+              <h6 class="mb-3">CHI TIẾT PHÒNG ĐẶT</h6>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label class="form-label">Tên</label>
@@ -180,7 +186,7 @@
           } else if (data.status == 'unavailable') {
             pay_info.innerText = "Đã hết phòng cho ngày đặt phòng này!";
           } else {
-            pay_info.innerHTML = "Số Phòng Trống: " + data.c_rooms + "<br>Số ngày Đặt: " + data.days + "<br>Tổng số tiền phải trả: " + data.payment + ' VNĐ';
+            pay_info.innerHTML = "Số Phòng Trống: " + data.c_rooms + "<br>Số ngày Đặt: " + data.days + "<br>Tổng số tiền phải trả: " + data.payment + ' vnđ';
             // pay_info.innerHTML = "Số lượng: " + data.ppp + ' ppp';
             // pay_info.innerHTML = "Số lượng T: " + data.kk + ' ppp';
             pay_info.classList.replace('text-danger', 'text-dark');
@@ -198,37 +204,37 @@
   </script>
 
   <?php
-  // function query($query, $params, $types) {
-  //   $pdo = new PDO('mysql:host=localhost;dbname=vinhhotel', 'root', '');
-  //   $stmt = $pdo->prepare($query);
-  //   $stmt->execute($params);
-  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  // }
+    // function query($query, $params, $types) {
+    //   $pdo = new PDO('mysql:host=localhost;dbname=vinhhotel', 'root', '');
+    //   $stmt = $pdo->prepare($query);
+    //   $stmt->execute($params);
+    //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
 
-  // // Lấy số lượng phòng còn lại từ cơ sở dữ liệu
-  // $q_quantity = "SELECT `quantity` FROM `rooms` WHERE `id` = ?";
-  // $result = query($q_quantity, [$_SESSION['room']['id']], 'iiiiiiiii');
-  // $remaining_quantity = $result[0]['quantity'];
+    // // Lấy số lượng phòng còn lại từ cơ sở dữ liệu
+    // $q_quantity = "SELECT `quantity` FROM `rooms` WHERE `id` = ?";
+    // $result = query($q_quantity, [$_SESSION['room']['id']], 'iiiiiiiii');
+    // $remaining_quantity = $result[0]['quantity'];
 
-  // echo $remaining_quantity;
-  // if ($remaining_quantity == 0) {
-  //   // Hiển thị thông báo đã hết phòng
-  //   // Thêm lớp CSS mới vào nút đặt phòng
-  //   echo '<script>document.getElementById("book-now").classList.add("button-disabled");</script>';
-  //   echo '<script>document.getElementById("pay_info").innerHTML = "Đã hết phòng, vui lòng chọn phòng khác!!!";</script>';
-  //   // echo "<script>let booking_form = document.getElementById('booking_form');booking_form.elements['pay_now'].setAttribute('disabled', true);</script>";
-  // }
+    // echo $remaining_quantity;
+    // if ($remaining_quantity == 0) {
+    //   // Hiển thị thông báo đã hết phòng
+    //   // Thêm lớp CSS mới vào nút đặt phòng
+    //   echo '<script>document.getElementById("book-now").classList.add("button-disabled");</script>';
+    //   echo '<script>document.getElementById("pay_info").innerHTML = "Đã hết phòng, vui lòng chọn phòng khác!!!";</script>';
+    //   // echo "<script>let booking_form = document.getElementById('booking_form');booking_form.elements['pay_now'].setAttribute('disabled', true);</script>";
+    // }
 
-  // if ($remaining_quantity > 8) {
-  //   // Hiển thị thông báo đã hết phòng
-  //   echo "Đã hết phòng";
-  //   // Thêm lớp CSS mới vào nút đặt phòng và disable nút đó
-  //   echo "<script>let booking_form = document.getElementById('booking_form');booking_form.elements['pay_now'].setAttribute('disabled', true);booking_form.elements['pay_now'].style.opacity = '0.5';</script>";
-  // } else {
-  //   // Xóa lớp CSS và enable nút đặt phòng
-  //   echo "<script>let booking_form = document.getElementById('booking_form');booking_form.elements['pay_now'].removeAttribute('disabled');booking_form.elements['pay_now'].style.opacity = '1';</script>";
-  // }
-
+    // if ($remaining_quantity > 8) {
+    //   // Hiển thị thông báo đã hết phòng
+    //   echo "Đã hết phòng";
+    //   // Thêm lớp CSS mới vào nút đặt phòng và disable nút đó
+    //   echo "<script>let booking_form = document.getElementById('booking_form');booking_form.elements['pay_now'].setAttribute('disabled', true);booking_form.elements['pay_now'].style.opacity = '0.5';</script>";
+    // } else {
+    //   // Xóa lớp CSS và enable nút đặt phòng
+    //   echo "<script>let booking_form = document.getElementById('booking_form');booking_form.elements['pay_now'].removeAttribute('disabled');booking_form.elements['pay_now'].style.opacity = '1';</script>";
+    // }
+    
   ?>
 
 </body>

@@ -12,7 +12,7 @@ if (isset($_POST['get_bookings'])) {
       WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ?) 
       AND (bo.booking_status = ? AND bo.arrival = ?) ORDER BY bo.booking_id ASC";
 
-  $res = select($query, ["%$frm_data[search]%", "%$frm_data[search]%", "%$frm_data[search]%", 'Đã Xác Nhận Đặt Phòng', 0], 'ssssi');
+  $res = select($query, ["%$frm_data[search]%", "%$frm_data[search]%", "%$frm_data[search]%", 'Đã Đặt', 0], 'ssssi');
 
   $i = 1;
   $table_data = "";
@@ -23,19 +23,11 @@ if (isset($_POST['get_bookings'])) {
   }
 
   while ($data = mysqli_fetch_assoc($res)) {
-    $date_now = date("d-m-Y", strtotime(date("d-m-Y")));
     $date = date("d-m-Y", strtotime($data['datentime']));
     $checkin = date("d-m-Y", strtotime($data['check_in']));
     $checkout = date("d-m-Y", strtotime($data['check_out']));
-    $count_days = date_diff(new DateTime($checkin), new DateTime($checkout))->days;
-    $time_out = date_diff(new DateTime($date_now), new DateTime($checkout))->days;
-    if(new DateTime($date_now) >= new DateTime($checkout)){
-      $han_phong = "<span class='badge bg-warning'>Đã Hết Hạn</span>";
-    }
-    else{
-      $han_phong = $time_out .' '."ngày";
-    }
-
+    $count_days = date_diff(new DateTime($checkin), new DateTime($checkout))->days; 
+    //convert từ string sang time để tính toán
     $table_data .= "
         <tr>
           <td>$i</td>
@@ -62,15 +54,15 @@ if (isset($_POST['get_bookings'])) {
             <br>
             <b>Thời Gian:</b> $count_days ngày
             <br>
-            <b>Thời Gian Còn Lại:</b> $han_phong
 
+            <b>Ngày Đặt:</b> $date
           </td>
           <td>
-            <button type='button' onclick='payment_booking($data[booking_id], $data[price], $count_days)' class='mb-2 btn btn-outline-success btn-sm fw-bold shadow-none'>
-              <i class='bi bi-check2-square'></i> Xác Nhận Thanh Toán
+            <button type='button' onclick='kh_booking($data[booking_id])' class='mb-2 btn btn-outline-primary btn-sm fw-bold shadow-none'>
+              <i class='bi bi-check2-square'></i> Xác Nhận Đặt Phòng
             </button>
             <br>
-            <button type='button' onclick='cancel_booking($data[booking_id])' class='mt-2 btn btn-outline-danger btn-sm fw-bold shadow-none'>
+            <button type='button' onclick='huy_booking($data[booking_id])' class='mt-2 btn btn-outline-danger btn-sm fw-bold shadow-none'>
               <i class='bi bi-trash'></i> Huỷ Đặt Phòng
             </button>
           </td>
@@ -118,18 +110,17 @@ if (isset($_POST['get_bookings'])) {
 //   // }
 // }
 
-if (isset($_POST['payment_booking'])) {
+if (isset($_POST['kh_booking'])) {
   $frm_data = filteration($_POST);
 
   $query = "UPDATE `booking_order` bo INNER JOIN `booking_details` bd
-      ON bo.booking_id = bd.booking_id INNER JOIN `rooms` r
-      ON bo.room_id = r.id
-      SET bo.arrival = ?, bo.booking_status = ?, bo.trans_amt = ?, bo.trans_status=?
+      ON bo.booking_id = bd.booking_id
+      SET bo.booking_status = ?
       WHERE bo.booking_id = ?";
 
-  $values = [1, $frm_data['booking_status'], $frm_data['trans_amt'], $frm_data['trans_status'],$frm_data['booking_id']];
+  $values = ['Đã Xác Nhận Đặt Phòng',$frm_data['booking_id']];
 
-  $res = update($query, $values, 'isssi');
+  $res = update($query, $values, 'si');
   echo $res;
 }
 
@@ -147,12 +138,10 @@ if (isset($_POST['assign_room'])) {
   $res = update($query, $values, 'iisi'); 
 
   echo ($res == 2) ? 1 : 0;
-
-
 }
 
 
-if (isset($_POST['cancel_booking'])) {
+if (isset($_POST['huy_booking'])) {
   $frm_data = filteration($_POST);
 
   $query = "UPDATE `booking_order` bo INNER JOIN `rooms` r

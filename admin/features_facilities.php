@@ -1,11 +1,10 @@
 <?php
-require('inc/essentials.php');
-require('inc/db_config.php');
-adminLogin();
+  require('inc/essentials.php');
+  require('inc/db_config.php');
+  adminLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,14 +12,6 @@ adminLogin();
   <title>Admin Panel - Cơ Sở và Tiện Nghi</title>
   <?php require('inc/links.php'); ?>
 </head>
-<style>
-  @media screen and (max-width: 575px) {
-    .form {
-      margin: auto;
-    }
-  }
-</style>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -43,13 +34,13 @@ adminLogin();
             <div class="table-responsive-md" style="height: 350px; overflow-y: scroll;">
               <table class="table table-hover border">
                 <thead>
-                  <tr class="bg-dark text-light text-center">
+                  <tr class="bg-dark text-light">
                     <th scope="col">#</th>
                     <th scope="col">Tên</th>
                     <th scope="col">Hành Động</th>
                   </tr>
                 </thead>
-                <tbody id="features-data">
+                <tbody id="features-data">                 
                 </tbody>
               </table>
             </div>
@@ -59,6 +50,7 @@ adminLogin();
 
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
+
             <div class="d-flex align-items-center justify-content-between mb-3">
               <h5 class="card-title m-0">Tiện Nghi & Trang Thiết Bị</h5>
               <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
@@ -69,7 +61,7 @@ adminLogin();
             <div class="table-responsive-md" style="height: 350px; overflow-y: scroll;">
               <table class="table table-hover border">
                 <thead>
-                  <tr class="bg-dark text-light text-center">
+                  <tr class="bg-dark text-light">
                     <th scope="col">#</th>
                     <th scope="col">Icon</th>
                     <th scope="col">Tên</th>
@@ -77,7 +69,7 @@ adminLogin();
                     <th scope="col">Hành Động</th>
                   </tr>
                 </thead>
-                <tbody id="facilities-data">
+                <tbody id="facilities-data">                 
                 </tbody>
               </table>
             </div>
@@ -89,12 +81,12 @@ adminLogin();
       </div>
     </div>
   </div>
-
+  
 
   <!-- Feature modal -->
 
-  <div class="modal fade form" id="feature-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+  <div class="modal fade" id="feature-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
       <form id="feature_s_form">
         <div class="modal-content">
           <div class="modal-header">
@@ -118,7 +110,7 @@ adminLogin();
   <!-- Facility modal -->
 
   <div class="modal fade" id="facility-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="display: flex; justify-content: center;">
+    <div class="modal-dialog">
       <form id="facility_s_form">
         <div class="modal-content">
           <div class="modal-header">
@@ -152,5 +144,4 @@ adminLogin();
   <script src="scripts/features_facilities.js"></script>
 
 </body>
-
 </html>

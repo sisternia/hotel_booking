@@ -19,7 +19,7 @@
   <div class="container-fluid" id="main-content">
     <div class="row">
       <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-        <h3 class="mb-4">Thanh Toán Trả Phòng</h3>
+        <h3 class="mb-4">Phòng Mới Đặt</h3>
 
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
@@ -85,7 +85,7 @@
 
   <?php require('inc/scripts.php'); ?>
 
-  <script src="scripts/new_bookings.js"></script>
+  <script src="scripts/khdatphong.js"></script>
 
 </body>
 </html>

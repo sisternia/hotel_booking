@@ -1,11 +1,10 @@
 <?php
-require('inc/essentials.php');
-require('inc/db_config.php');
-adminLogin();
+  require('inc/essentials.php');
+  require('inc/db_config.php');
+  adminLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,6 @@ adminLogin();
   <title>Admin Panel - Hồ Sơ Đặt Phòng</title>
   <?php require('inc/links.php'); ?>
 </head>
-
 <body class="bg-light">
 
   <?php require('inc/header.php'); ?>
@@ -27,22 +25,22 @@ adminLogin();
           <div class="card-body">
 
             <div class="text-end mb-4">
-              <input type="text" id="search_input" oninput="get_bookings(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Tìm kiếm theo tên khách hàng...">
+              <input type="text" id="search_input" oninput="get_bookings(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Nhập để tìm kiếm...">
             </div>
 
             <div class="table-responsive">
               <table class="table table-hover border" style="min-width: 1200px;">
                 <thead>
-                  <tr class="bg-dark text-light text-center">
+                  <tr class="bg-dark text-light">
                     <th scope="col">#</th>
                     <th scope="col">Khách Hàng</th>
                     <th scope="col">Phòng</th>
                     <th scope="col">Chi Tiết Phòng Đặt</th>
                     <th scope="col">Trạng Thái</th>
-                    <th scope="col" style="width: 15%;">Hành Động</th>
+                    <th scope="col">Hành Động</th>
                   </tr>
                 </thead>
-                <tbody id="table-data">
+                <tbody id="table-data">                 
                 </tbody>
               </table>
             </div>
@@ -59,10 +57,11 @@ adminLogin();
     </div>
   </div>
 
+
+
   <?php require('inc/scripts.php'); ?>
 
   <script src="scripts/booking_records.js"></script>
 
 </body>
-
 </html>
